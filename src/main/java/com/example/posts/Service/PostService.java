@@ -29,6 +29,10 @@ public class PostService {
         return false;
     }
 
+    public Optional<Post> getPostById(int id) {
+        return postRepository.findById(id);
+    }
+
     public Post updatePost(Post postDetails) {
         int id = postDetails.getId();
         Optional<Post> optionalPost = postRepository.findById(id);
