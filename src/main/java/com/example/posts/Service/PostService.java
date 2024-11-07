@@ -21,8 +21,12 @@ public class PostService {
         return postRepository.save(post);
     }
 
-    public void deletePost(int id) {
-        postRepository.deleteById(id);
+    public boolean deletePost(int id) {
+        if(postRepository.existsById(id)) {
+            postRepository.deleteById(id);
+            return true;
+        }
+        return false;
     }
 
     public Post updatePost(Post postDetails) {
@@ -34,7 +38,7 @@ public class PostService {
             post.setContent(postDetails.getContent());
             return postRepository.save(post);
         } else {
-            throw new RuntimeException("Post not found with id " + id);
+            return new Post(-1, "post not found", "post not found");
         }
     }
 

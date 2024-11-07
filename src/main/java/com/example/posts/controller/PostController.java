@@ -30,7 +30,10 @@ public class PostController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deletePost(@PathVariable int id) {
-        postService.deletePost(id);
+        boolean b = postService.deletePost(id);
+        if(b==false) {
+            return new ResponseEntity<>("id not found", HttpStatus.NOT_FOUND);
+        }
         return new ResponseEntity<>("Post deleted successfully!", HttpStatus.OK);
     }
 
